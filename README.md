@@ -1,4 +1,4 @@
-<img width="15%" height="25%" align="left" src="https://i.ibb.co/zVLbCFYG/Explorers-Map.png" alt="Minecraft map item">
+<img width="20%" height="25%" align="left" src="https://i.ibb.co/zVLbCFYG/Explorers-Map.png" alt="Minecraft map item">
 
 <h3 align="center">Explorers Map</h3>
 <p align="center">Changes the map to only show places you've been to like the true explorer you are! With multiplayer support.</p>
