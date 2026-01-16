@@ -25,7 +25,9 @@ The mod comes with the following configuration file:
   // The rate at which cached tile images are loaded from the disk. This value is per tick.
   "DiskLoadRate": 16,
   // The rate at which the chunks around the player are mapped into tiles. This value is per tick. Vanilla value is 20.
-  "GenerationRate": 20
+  "GenerationRate": 20,
+  // Sets how far you can zoom out. Min value is 2.
+  "MinZoom": 8.0
 }
 ```
 
