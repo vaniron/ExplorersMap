@@ -19,6 +19,9 @@ public class ExplorersMapConfig {
             .append(new KeyedCodec<>("GenerationRate", Codec.INTEGER),
                     ExplorersMapConfig::setGenerationRate,
                     ExplorersMapConfig::getGenerationRate).add()
+            .append(new KeyedCodec<>("MinZoom", Codec.FLOAT),
+                    ExplorersMapConfig::setMinZoom,
+                    ExplorersMapConfig::getMinZoom).add()
             // This does not work right now
             /*.append(new KeyedCodec<>("UnlimitedPlayerTracking", Codec.BOOLEAN),
                     ExplorersMapConfig::setUnlimitedPlayerTracking,
@@ -30,6 +33,7 @@ public class ExplorersMapConfig {
     private int diskLoadRate = 16;
     private int generationRate = 20;
     private boolean unlimitedPlayerTracking = true;
+    private float minZoom = 8;
 
     public void setExplorationRadius(int explorationRadius) {
         this.explorationRadius = explorationRadius;
@@ -69,5 +73,13 @@ public class ExplorersMapConfig {
 
     public boolean isUnlimitedPlayerTracking() {
         return unlimitedPlayerTracking;
+    }
+
+    public void setMinZoom(float minZoom) {
+        this.minZoom = minZoom;
+    }
+
+    public float getMinZoom() {
+        return minZoom;
     }
 }

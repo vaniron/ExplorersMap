@@ -2,12 +2,14 @@ package dev.cerus.explorersmap;
 
 import com.hypixel.hytale.component.Holder;
 import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.protocol.packets.worldmap.UpdateWorldMapSettings;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.event.events.ShutdownEvent;
 import com.hypixel.hytale.server.core.event.events.player.AddPlayerToWorldEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.WorldMapTracker;
 import com.hypixel.hytale.server.core.universe.world.events.AddWorldEvent;
 import com.hypixel.hytale.server.core.universe.world.events.RemoveWorldEvent;
@@ -65,8 +67,18 @@ public class ExplorersMapPlugin extends JavaPlugin {
             return;
         }
 
+        World world = event.getWorld();
+
+        // Allow more zoom
+        UpdateWorldMapSettings settingsPacket = world.getWorldMapManager().getWorldMapSettings().getSettingsPacket();
+        float minZoom = config.get().getMinZoom();
+        if (settingsPacket.minScale > minZoom && minZoom < settingsPacket.maxScale) {
+            settingsPacket.minScale = Math.max(2, minZoom);
+            player.getWorldMapTracker().sendSettings(world);
+        }
+
         // Load exploration data
-        ExplorationStorage.load(event.getWorld().getName(), player.getUuid());
+        ExplorationStorage.load(world.getName(), player.getUuid());
 
         if (player.getWorldMapTracker().getClass() != WorldMapTracker.class) {
             // Another mod has injected their stuff, abort
